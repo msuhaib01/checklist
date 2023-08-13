@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checlist!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <section>
+    <nav>
+      <img src="images/tick.svg" alt="check" width="100px"></img>
+      <h1>CHECKLIST!</h1>
+    </nav>
+    <main>
+      <div class="form-main">
+        <form class="item-form">
+          <div class="form-container">
+            <input class="text-field" type="text" name="item" id="item" placeholder="Add...">
+            <button class="add-item" type="submit">Add Item</button>
+          </div>
+        </form>
+      </div>
+      <div class="filter">
+        <input type="text" class="form-input-filter" id="filter" placeholder="Filter Items" />
+      </div>
+      <div class="list">
+        <ul class="item-list">
+          <li class="list-element">
+            <p class="item-text">Apples</p>
+            <button class="item-rm-bt"><img src="images/remove.png" alt="remove"></button>
+          </li>
+          <li class="list-element">
+            <p class="item-text">Pineapples</p>
+            <button class="item-rm-bt"><img src="images/remove.png" alt="remove"></button>
+          </li>
+          <li class="list-element">
+            <p class="item-text">Oranges</p>
+            <button class="item-rm-bt"><img src="images/remove.png" alt="remove"></button>
+          </li>
+        </ul>
+      </div>
+      <div class="div-clear-btn">
+        <button class="btn-clear">Clear All</button>
+      </div>
+    </main>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
