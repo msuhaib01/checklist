@@ -11,6 +11,8 @@ const itemClear = document.querySelector(".btn-clear");
 
 const filter = document.querySelector(".filter");
 const clearBtn = document.querySelector(".div-clear-btn");
+
+const inputFilter = document.querySelector(".form-input-filter");
 // Event Listeners Functions
 
 const addItem = (e) => {
