@@ -7,6 +7,10 @@ mainForm.addEventListener("submit", (e) => {
 const itemForm = document.querySelector(".item-form");
 const itemInput = document.querySelector(".text-field");
 const itemList = document.querySelector(".item-list");
+const itemClear = document.querySelector(".btn-clear");
+
+const filter = document.querySelector(".filter");
+const clearBtn = document.querySelector(".div-clear-btn");
 // Event Listeners Functions
 
 const addItem = (e) => {
@@ -29,6 +33,7 @@ const addItem = (e) => {
   console.log(li);
 
   itemList.appendChild(li);
+  checkUI();
 };
 
 // create li-remove-button
@@ -42,5 +47,39 @@ const createListRemoveButton = () => {
   return btn;
 };
 
+const itemDel = (e) => {
+  console.log(e.target.id);
+  console.log(e.target.tagName);
+  if (e.target.tagName === "IMG") {
+    e.target.parentElement.parentElement.remove();
+  } else if (e.target.tagName === "BUTTON") {
+    e.target.parentElement.remove();
+  }
+  checkUI();
+};
+
+const itemsDel = () => {
+  while (itemList.firstChild) {
+    itemList.firstChild.remove();
+  }
+  checkUI();
+};
+
+const checkUI = () => {
+  const items = itemList.querySelectorAll("li");
+
+  console.log(items.length);
+  if (items.length === 0) {
+    clearBtn.style.visibility = "hidden";
+    filter.style.visibility = "hidden";
+  } else {
+    clearBtn.style.visibility = "visible";
+    filter.style.visibility = "visible";
+  }
+};
 // Event Listeners
 itemForm.addEventListener("submit", addItem);
+itemList.addEventListener("click", itemDel);
+itemClear.addEventListener("click", itemsDel);
+
+checkUI();
