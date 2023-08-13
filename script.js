@@ -78,30 +78,52 @@ const saveItemsToStorage = (itemsFromStorage) => {
   localStorage.setItem("items", JSON.stringify(itemsFromStorage));
 };
 
+// const itemDel = (e) => {
+//   let itemsFromStorage = loadItemsFromStorage();
+//   if (e.target.tagName === "IMG") {
+//     const targetText =
+//       e.target.parentElement.parentElement.querySelector("p").textContent;
+//     const index = itemsFromStorage.indexOf(targetText);
+//     if (index > -1) {
+//       itemsFromStorage.splice(index, 1);
+//       saveItemsToStorage(itemsFromStorage);
+//     }
+//     e.target.parentElement.parentElement.remove();
+//   } else if (e.target.tagName === "BUTTON") {
+//     const targetText = e.target.parentElement.querySelector("p").textContent;
+//     const index = itemsFromStorage.indexOf(targetText);
+//     if (index > -1) {
+//       itemsFromStorage.splice(index, 1);
+//       saveItemsToStorage(itemsFromStorage);
+//     }
+
+//     e.target.parentElement.remove();
+//   }
+
+//   checkUI();
+// };
+
 const itemDel = (e) => {
-  let itemsFromStorage = loadItemsFromStorage();
-  console.log(itemsFromStorage);
   if (e.target.tagName === "IMG") {
-    const targetText =
-      e.target.parentElement.parentElement.querySelector("p").textContent;
-    const index = itemsFromStorage.indexOf(targetText);
-    if (index > -1) {
-      itemsFromStorage.splice(index, 1);
-      saveItemsToStorage(itemsFromStorage);
-    }
-    e.target.parentElement.parentElement.remove();
+    const targetListElement =
+      e.target.parentElement.parentElement.querySelector("p");
+    itemDelLocal(targetListElement);
+    itemDelDOM(targetListElement);
   } else if (e.target.tagName === "BUTTON") {
-    const targetText = e.target.parentElement.querySelector("p").textContent;
-    const index = itemsFromStorage.indexOf(targetText);
-    if (index > -1) {
-      itemsFromStorage.splice(index, 1);
-      saveItemsToStorage(itemsFromStorage);
-    }
-
-    e.target.parentElement.remove();
+    const targetListElement = e.target.parentElement.querySelector("p");
+    itemDelLocal(targetListElement);
+    itemDelDOM(targetListElement);
   }
-
   checkUI();
+};
+const itemDelLocal = (targetListElement) => {
+  const targetText = targetListElement.textContent;
+  let itemsFromStorage = loadItemsFromStorage();
+  itemsFromStorage = itemsFromStorage.filter((i) => i !== targetText);
+  saveItemsToStorage(itemsFromStorage);
+};
+const itemDelDOM = (targetListElement) => {
+  targetListElement.parentElement.remove();
 };
 
 const itemsDel = () => {
