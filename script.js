@@ -12,22 +12,43 @@ const filter = document.querySelector(".filter");
 const clearBtn = document.querySelector(".div-clear-btn");
 const inputFilter = document.querySelector(".form-input-filter");
 const formButton = itemForm.querySelector("button");
-
+const divDanger = document.querySelector(".div-danger");
 let isEditMode = false;
 let globalCurrentEditListElement = undefined;
 
 // Event Listeners Functions
 
-const formHandler = (e) => {
-  isEditMode ? saveEditItem() : addItem();
+const checkIfDuplicate = (textInput) => {
+  let itemsFromStorage = loadItemsFromStorage();
+  return itemsFromStorage.includes(textInput);
 };
 
-const addItem = () => {
+const formHandler = (e) => {
   const newItem = itemInput.value;
   if (newItem === "") {
-    alert("Please Add an Item");
+    dangerVisible("Please Add an Item!");
     return;
+  } else if (checkIfDuplicate(newItem)) {
+    dangerVisible("Item already Exists!");
+    return;
+  } else {
+    dangerInvisible();
   }
+
+  isEditMode ? saveEditItem(newItem) : addItem(newItem);
+};
+const dangerVisible = (errorType) => {
+  console.log("ERROR BANG");
+  console.log(divDanger);
+  divDanger.classList.add("div-visible");
+  divDanger.firstElementChild.textContent = errorType;
+  setTimeout(dangerInvisible, 4000);
+};
+const dangerInvisible = () => {
+  console.log("CORRECT BANG", divDanger);
+  divDanger.classList.remove("div-visible");
+};
+const addItem = (newItem) => {
   addToDOM(newItem);
   addToLocal(newItem);
   itemInput.value = "";
@@ -35,12 +56,7 @@ const addItem = () => {
   checkUI();
 };
 
-const saveEditItem = () => {
-  const newItem = itemInput.value;
-  if (newItem === "") {
-    alert("Please Add an some text to edit");
-    return;
-  }
+const saveEditItem = (newItem) => {
   const targetListElementParagraph =
     globalCurrentEditListElement.querySelector("p");
   const ogText = targetListElementParagraph.textContent;
