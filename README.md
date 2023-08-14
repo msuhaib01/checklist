@@ -1,20 +1,20 @@
-# Hitlist!
-Hey there! Are you a glob trotting mercenary, world conquring villian, or internationally wanted criminal?
-Tired of having to keep track of all the heros trying to foil your plans?
-Tired of getting confused on who you've "put to bed" and who you haven't?
+# Hitlist! 🎯
+Hey there! Are you a globe-trotting mercenary, world-conquering villain, or internationally wanted criminal? 😈
+Tired of keeping track of all the heroes trying to foil your plans? 🦹‍♂️
+Struggling to differentiate who's been "put to bed" and who hasn't? 😴💤
 
-Well fear not anyomre!
+Fear not anymore!
 
-With our patented (patent pending) management software these are a concern of the past!
+Introducing our patented (patent pending) management software – leaving these concerns in the past! 📜✅
 
-Built with nothing but vanilla Javascript, HTML and CSS this has the most light weight and bloat free solution possible.
-So you can get back to villian business.
+Built with nothing but vanilla Javascript, HTML, and CSS, it offers a lightweight, bloat-free solution. 🛠️🧼
+So you can quickly return to your villainous pursuits. 💼🌆
 
-We want to make your life easier.
+Not only that, it boasts a convenient *mobile version*, allowing you to manage your ~~villainy~~ legal activities on the go! 📱🌐
 
-A product for villians by villians.
+Simplifying your life is our mission. 🌟
 
-## Hosted at: https://msuhaib01.github.io/hitlist/
+## Designed by: Muhmmad Suhaib 👨‍🎨
+## Developed by: Muhmmad Suhaib 👨‍💻
 
-## Design by: Muhmmad Suhaib
-## Code by: Muhmmad Suhaib
+## Hosted at: [https://msuhaib01.github.io/hitlist/](https://msuhaib01.github.io/hitlist/) 🌐
