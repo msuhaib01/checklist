@@ -247,18 +247,6 @@ main {
   :root {
     --globalwidth: 16rem;
   }
-  nav {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  nav div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
   nav h3 {
     display: none;
   }
