@@ -31,6 +31,8 @@ const formHandler = (e) => {
   } else if (checkIfDuplicate(newItem)) {
     dangerVisible("Item already Exists!");
     return;
+  } else if (newItem.length > 30) {
+    dangerVisible("Input too long!");
   } else {
     dangerInvisible();
   }
