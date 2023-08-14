@@ -10,7 +10,10 @@ Introducing our patented (patent pending) management software – leaving these 
 Built with nothing but vanilla Javascript, HTML, and CSS, it offers a lightweight, bloat-free solution. 🛠️🧼
 So you can quickly return to your villainous pursuits. 💼🌆
 
-Not only that, it boasts a convenient *mobile version*, allowing you to manage your ~~villainy~~ legal activities on the go! 📱🌐
+Not only that, it boasts a convenient *mobile version*, allowing you to
+manage your ~~villainy~~ legal activities on the go! 📱🌐
+
+Built in filter to make searching through a list as easy as taking candy from a baby!
 
 Simplifying your life is our mission. 🌟
 
