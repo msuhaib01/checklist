@@ -26,13 +26,13 @@ const checkIfDuplicate = (textInput) => {
 const formHandler = (e) => {
   const newItem = itemInput.value;
   if (newItem === "") {
-    dangerVisible("Please Add an Item!");
+    dangerVisible("Please Add a Target!");
     return;
   } else if (checkIfDuplicate(newItem)) {
-    dangerVisible("Item already Exists!");
+    dangerVisible("Target Already Exists!");
     return;
   } else if (newItem.length > 30) {
-    dangerVisible("Input too long!");
+    dangerVisible("Target Too Long!");
   } else {
     dangerInvisible();
   }
@@ -295,6 +295,15 @@ function init() {
   itemClear.addEventListener("click", itemsDel);
   inputFilter.addEventListener("input", filterItems);
   document.addEventListener("DOMContentLoaded", getItemsFromStorage());
+
+  if (localStorage.getItem("firstTime") == null) {
+    localStorage.setItem("firstTime", "false");
+    addItem("James Bond");
+    addItem("Perry The Platypus");
+    addItem("Son Goku (Kakarot)");
+  }
+
+  checkUI();
 }
 
 init();

@@ -4,28 +4,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checlist!</title>
+  <title>HITLIST!</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
   <section>
-    <nav>
-      <img src="images/tick.svg" alt="check" width="100px"></img>
-      <h1>CHECKLIST!</h1>
-    </nav>
     <main>
+      <nav>
+        <img src="images/logo.svg" alt="check" width="100px"></img>
+        <div>      
+          <h1>HITLIST!</h1>
+          <h3>"Solve" your <span>problems</span> goals.</h3>
+          <p>A tool for villians, by villians.</p>
+        </div>
+      </nav>
+  
       <div class="form-main">
         <form class="item-form" autocomplete="off">
           <div class="form-container">
             <input class="text-field" type="text" name="item" id="item" placeholder="Add...">
-            <button class="add-item" type="submit">Add Item</button>
+            <button class="add-item" type="submit">Add Target</button>
           </div>
         </form>
       </div>
       <div class="div-danger"><p class="p-danger">Wrong</p></div>
       <div class="filter">
-        <input type="text" class="form-input-filter" id="filter" placeholder="Filter Items" />
+        <input type="text" class="form-input-filter" id="filter" placeholder="Filter Targets..." />
       </div>
       <div class="list">
         <ul class="item-list">
