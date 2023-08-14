@@ -92,6 +92,8 @@ const createListRemoveButton = () => {
   const img = document.createElement("img");
   img.src = "images/remove.png";
   img.alt = "remove";
+  img.width = "24";
+
   img.classList.add("img-remove");
 
   btn.appendChild(img);
@@ -104,6 +106,7 @@ const createListEditButton = () => {
   img.src = "images/edit.svg";
   img.alt = "edit";
   img.classList.add("img-edit");
+  img.width = "24";
   btn.appendChild(img);
   return btn;
 };
