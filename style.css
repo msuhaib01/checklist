@@ -141,6 +141,32 @@ h1 {
 .item-rm-bt:active img {
   background-color: #222;
 }
+
+.item-ed-bt {
+  background-color: black;
+  border: none;
+}
+.item-ed-bt img {
+  width: 1.5rem;
+}
+.item-ed-bt:hover img {
+  background-color: #333333;
+}
+
+.item-ed-bt:active img {
+  background-color: #222;
+}
+
+.ed-btn-edit-mode {
+  background-color: #333333;
+}
+.ed-btn-edit-mode:hover img {
+  background-color: #222;
+}
+.ed-btn-edit-mode:active img {
+  background-color: black;
+}
+
 main {
   display: flex;
   justify-content: center;
@@ -175,4 +201,8 @@ main {
 }
 .filter {
   visibility: hidden;
+}
+
+.edit-mode {
+  color: #777;
 }

@@ -11,9 +11,18 @@ const itemClear = document.querySelector(".btn-clear");
 const filter = document.querySelector(".filter");
 const clearBtn = document.querySelector(".div-clear-btn");
 const inputFilter = document.querySelector(".form-input-filter");
+const formButton = itemForm.querySelector("button");
+
+let isEditMode = false;
+let globalCurrentEditListElement = undefined;
+
 // Event Listeners Functions
 
-const addItem = (e) => {
+const formHandler = (e) => {
+  isEditMode ? saveEditItem() : addItem();
+};
+
+const addItem = () => {
   const newItem = itemInput.value;
   if (newItem === "") {
     alert("Please Add an Item");
@@ -26,6 +35,38 @@ const addItem = (e) => {
   checkUI();
 };
 
+const saveEditItem = () => {
+  const newItem = itemInput.value;
+  if (newItem === "") {
+    alert("Please Add an some text to edit");
+    return;
+  }
+  const targetListElementParagraph =
+    globalCurrentEditListElement.querySelector("p");
+  const ogText = targetListElementParagraph.textContent;
+  editInDOM(newItem, targetListElementParagraph);
+  editInLocalMem(newItem, ogText);
+
+  exitEditMode();
+};
+
+const editInDOM = (newItem, targetListElementParagraph) => {
+  targetListElementParagraph.textContent = newItem;
+};
+
+const editInLocalMem = (newItem, ogText) => {
+  let itemsFromStorage = loadItemsFromStorage();
+
+  itemsFromStorage = itemsFromStorage.map((item) => {
+    if (item == ogText) {
+      return newItem;
+    } else {
+      return item;
+    }
+  });
+  saveItemsToStorage(itemsFromStorage);
+};
+
 // create li-remove-button
 const createListRemoveButton = () => {
   const btn = document.createElement("button");
@@ -33,6 +74,18 @@ const createListRemoveButton = () => {
   const img = document.createElement("img");
   img.src = "images/remove.png";
   img.alt = "remove";
+  img.classList.add("img-remove");
+
+  btn.appendChild(img);
+  return btn;
+};
+const createListEditButton = () => {
+  const btn = document.createElement("button");
+  btn.classList.add("item-ed-bt");
+  const img = document.createElement("img");
+  img.src = "images/edit.svg";
+  img.alt = "edit";
+  img.classList.add("img-edit");
   btn.appendChild(img);
   return btn;
 };
@@ -42,8 +95,14 @@ const addToDOM = (newItem) => {
   p.classList.add("item-text");
   p.appendChild(document.createTextNode(newItem));
   const btn = createListRemoveButton();
+  const editBtn = createListEditButton();
+  const btnsDiv = document.createElement("div");
+  btnsDiv.appendChild(editBtn);
+  btnsDiv.appendChild(btn);
   li.appendChild(p);
-  li.appendChild(btn);
+
+  li.appendChild(btnsDiv);
+
   li.classList.add("list-element");
 
   itemList.appendChild(li);
@@ -103,18 +162,68 @@ const saveItemsToStorage = (itemsFromStorage) => {
 //   checkUI();
 // };
 
-const itemDel = (e) => {
-  if (e.target.tagName === "IMG") {
+const listItemClicked = (e) => {
+  if (e.target.classList.contains("img-remove")) {
+    const targetListElement =
+      e.target.parentElement.parentElement.parentElement.querySelector("p");
+    delTypeHandler(targetListElement);
+  } else if (e.target.classList.contains("item-rm-bt")) {
     const targetListElement =
       e.target.parentElement.parentElement.querySelector("p");
-    itemDelLocal(targetListElement);
-    itemDelDOM(targetListElement);
-  } else if (e.target.tagName === "BUTTON") {
-    const targetListElement = e.target.parentElement.querySelector("p");
-    itemDelLocal(targetListElement);
-    itemDelDOM(targetListElement);
+    delTypeHandler(targetListElement);
+  } else if (e.target.classList.contains("img-edit")) {
+    const targetListElement =
+      e.target.parentElement.parentElement.parentElement;
+    editModeTypeHandler(targetListElement);
+  } else if (e.target.classList.contains("item-ed-bt")) {
+    const targetListElement = e.target.parentElement.parentElement;
+    editModeTypeHandler(targetListElement);
   }
   checkUI();
+};
+const delTypeHandler = (targetListElement) => {
+  exitEditMode();
+  itemDelLocal(targetListElement);
+  itemDelDOM(targetListElement);
+};
+const editModeTypeHandler = (targetListElement) => {
+  if (
+    globalCurrentEditListElement === undefined ||
+    targetListElement === globalCurrentEditListElement
+  ) {
+    isEditMode ? exitEditMode() : setEditMode(targetListElement);
+  }
+};
+const setEditMode = (targetListElement) => {
+  isEditMode = true;
+  globalCurrentEditListElement = targetListElement;
+  itemInput.value = "";
+
+  const targetListElementParagraph = targetListElement.querySelector("p");
+  const targetListElementButtonEdit =
+    targetListElement.querySelector(".item-ed-bt");
+  targetListElementButtonEdit.classList.add("ed-btn-edit-mode");
+  targetListElementParagraph.classList.add("edit-mode");
+  formButton.firstChild.textContent = "Save Edit";
+  itemInput.placeholder = "Edit...";
+  itemInput.focus();
+};
+
+const exitEditMode = () => {
+  if (isEditMode) {
+    isEditMode = false;
+
+    const targetListElementParagraph =
+      globalCurrentEditListElement.querySelector("p");
+    globalCurrentEditListElement = undefined;
+
+    const targetListElementButtonEdit = document.querySelector(".item-ed-bt");
+    targetListElementParagraph.classList.remove("edit-mode");
+    targetListElementButtonEdit.classList.remove("ed-btn-edit-mode");
+    itemInput.value = "";
+    formButton.firstChild.textContent = "Add Item";
+    itemInput.placeholder = "Add...";
+  }
 };
 const itemDelLocal = (targetListElement) => {
   const targetText = targetListElement.textContent;
@@ -127,6 +236,9 @@ const itemDelDOM = (targetListElement) => {
 };
 
 const itemsDel = () => {
+  console.log("WHYYYY");
+  exitEditMode();
+  console.log("YOU NO BANGGG");
   while (itemList.firstChild) {
     itemList.firstChild.remove();
   }
@@ -136,7 +248,6 @@ const itemsDel = () => {
 
 const checkUI = () => {
   const items = itemList.querySelectorAll("li");
-
   if (items.length === 0) {
     clearBtn.style.visibility = "hidden";
     filter.style.visibility = "hidden";
@@ -161,8 +272,8 @@ const filterItems = (e) => {
 
 function init() {
   // Event Listeners
-  itemForm.addEventListener("submit", addItem);
-  itemList.addEventListener("click", itemDel);
+  itemForm.addEventListener("submit", formHandler);
+  itemList.addEventListener("click", listItemClicked);
   itemClear.addEventListener("click", itemsDel);
   inputFilter.addEventListener("input", filterItems);
   document.addEventListener("DOMContentLoaded", getItemsFromStorage());
