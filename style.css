@@ -10,11 +10,6 @@
 :root {
   --globalwidth: 25rem;
 }
-@media screen and (max-width: 600px) {
-  :root {
-    --globalwidth: 16rem;
-  }
-}
 
 body {
   background-color: black;
@@ -246,4 +241,25 @@ main {
   color: rgb(255, 60, 60);
   font-weight: 700;
   font-size: smaller;
+}
+
+@media screen and (max-width: 600px) {
+  :root {
+    --globalwidth: 16rem;
+  }
+  nav {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  nav div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  nav h3 {
+    display: none;
+  }
 }
