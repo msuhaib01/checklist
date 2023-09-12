@@ -33,6 +33,7 @@ const formHandler = (e) => {
     return;
   } else if (newItem.length > 30) {
     dangerVisible("Target Too Long!");
+    return null;
   } else {
     dangerInvisible();
   }
