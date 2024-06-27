@@ -1,6 +1,6 @@
 # Hitlist! 🎯
 
-Hey there! Are you a glob trotting mercenary, world conquring villian, or internationally wanted criminal?😈
+Hey there! Are you a globe trotting mercenary, world conquring villian, or internationally wanted criminal?😈
 
 Tired of having to keep track of all the heros trying to foil your plans? 🦹‍♂️
 
